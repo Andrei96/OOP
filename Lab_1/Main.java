@@ -5,7 +5,7 @@ import java.awt.event.*;
 
 public class Main {
 
-    public static void main(String[] args) {
+public static void main(String[] args) {
 //        JFrame frame = new JFrame("First");
 //        frame.setDefaultCloseOperation(frame.EXIT_ON_CLOSE);
 //        frame.setSize(400, 400);
@@ -20,7 +20,7 @@ public class Main {
     }
 }
 
-class Frame extends JFrame {
+ class Frame extends JFrame {
 
     Frame(String text, int width, int height) {
         super();
@@ -30,14 +30,14 @@ class Frame extends JFrame {
         setVisible(true);
 //        setResizable(false);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        new Button(this, true);
+        new Button(this);
     }
 }
 
 class Button extends JButton {
     Frame frame;
 
-    Button(Frame frame, boolean state) {
+    Button(Frame frame) {
         super();
         this.frame = frame;
         JTextField tf = new JTextField();
@@ -45,8 +45,6 @@ class Button extends JButton {
         tf.setBounds(100, 80, 200, 30);
         tf_resoult.setBounds(100, 110, 200, 30);
         JButton btn1 = new JButton("Ok");
-
-
         btn1.setBounds(350, 80, 80, 50);
         btn1.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -60,10 +58,7 @@ class Button extends JButton {
 
             }
         });
-
-
         frame.getContentPane().add(btn1);
-
         frame.getContentPane().add(tf);
         frame.getContentPane().add(tf_resoult);
 
