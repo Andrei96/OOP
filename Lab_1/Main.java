@@ -1,4 +1,4 @@
-package Igor_Lugovyi.Lab_1;
+package Lab_1;
 
 import javax.swing.*;
 import java.awt.event.*;
@@ -17,20 +17,22 @@ public static void main(String[] args) {
 //        frame.add(field);
 //        frame.add(btn,BorderLayout.EAST);
         new Frame("Start", 500, 400);
+
     }
 }
 
  class Frame extends JFrame {
 
     Frame(String text, int width, int height) {
-        super();
+
         setTitle(text);
         setBounds(50, 50, width, height);
         setLayout(null);
-        setVisible(true);
+
 //        setResizable(false);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         new Button(this);
+        setVisible(true);
     }
 }
 
@@ -38,7 +40,7 @@ class Button extends JButton {
     Frame frame;
 
     Button(Frame frame) {
-        super();
+
         this.frame = frame;
         JTextField tf = new JTextField();
         JTextField tf_resoult = new JTextField();

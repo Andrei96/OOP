@@ -1,4 +1,4 @@
-package Igor_Lugovyi.Lab_2;
+package  Lab_2;
 
 
 import javax.swing.*;
