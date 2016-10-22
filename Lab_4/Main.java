@@ -18,7 +18,7 @@ public class Main {
 
 class Frame extends JFrame {
     Frame(String text, int width, int height) {
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setBounds(50, 50, width, height);
         setTitle(text);
         setLayout(null);
