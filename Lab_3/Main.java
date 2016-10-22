@@ -2,6 +2,10 @@ package Lab_3;
 
 
 import javax.swing.*;
+import javax.swing.colorchooser.ColorChooserComponentFactory;
+import javax.swing.colorchooser.ColorSelectionModel;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -10,7 +14,7 @@ import java.util.Random;
 public class Main {
     public static void main(String[] args) {
 
-        new Frame("Start", 1700, 500);
+        new Frame("Start", 1700, 1200);
 
     }
 
@@ -39,12 +43,14 @@ class Presenter extends JButton {
     JButton editBtn = new JButton(buttonText);
 
     JButton changeBtn = new JButton("Change");
-    JButton deleteBtn = new JButton("Delete");
+    JButton deleteBtn = new JButton("Exit");
+    JColorChooser colorChooser = new JColorChooser();
 
     Presenter() {
         jTextField.setBounds(200, 20, 1000, 30);
         changeBtn.setBounds(250, 120, 100, 100);
         deleteBtn.setBounds(400, 120, 100, 100);
+        colorChooser.setBounds(200, 250, 500, 500);
 
     }
 
@@ -55,15 +61,19 @@ class Presenter extends JButton {
 
         Action action = new Action();
         action.createChangeableButton(editBtn, frame);
-        action.pressChangeableButton(editBtn, jTextField);
+
 
         Listener listener = new Listener();
         listener.addChangeActionListener(editBtn, changeBtn);
         listener.addDeleteButtonListener(editBtn, deleteBtn, frame, jTextField);
+        listener.addChangableButtonListener(editBtn, jTextField);
+        listener.addChooseColotListener(colorChooser,editBtn);
+
 
         frame.add(changeBtn);
         frame.add(deleteBtn);
         frame.add(jTextField);
+        frame.add(colorChooser);
     }
 }
 
@@ -87,18 +97,15 @@ class Action {
     }
 
     void pressChangeableButton(JButton btn, JTextField jTextField) {
-        btn.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                jTextField.setText(jTextField.getText() + btn.getText());
-            }
-        });
 
+        jTextField.setText(jTextField.getText() + btn.getText());
     }
 
     void deleteButton(JButton btn, Frame frame, JTextField jTextField) {
         btn.setVisible(false);
         frame.remove(btn);
         jTextField.setText("");
+        System.exit(1);
     }
 
     void changeButton(JButton btn) {
@@ -112,6 +119,12 @@ class Action {
         buttonColor = Color.getHSBColor(random.nextInt(255), random.nextInt(255), random.nextInt(255));
 
         setButtonProperties(btn, buttonText, buttonColor, buttonSize);
+    }
+
+    void changeButtonColor(JButton btn, JColorChooser colorChooser) {
+        Color newColor = colorChooser.getColor();
+        btn.setBackground(newColor);
+
     }
 
 }
@@ -135,6 +148,27 @@ class Listener {
                 action.deleteButton(buttonToDelete, frame, jTextField);
             }
         });
+    }
+
+    void addChooseColotListener(JColorChooser colorChooser, JButton btn) {
+        Action action = new Action();
+        colorChooser.getSelectionModel().addChangeListener(
+                new ChangeListener() {
+                    public void stateChanged(ChangeEvent e) {
+                        action.changeButtonColor(btn, colorChooser);
+                    }
+                }
+        );
+    }
+
+    void addChangableButtonListener(JButton btn, JTextField jTextField) {
+        Action action = new Action();
+        btn.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                action.pressChangeableButton(btn, jTextField);
+            }
+        });
+
     }
 
 
