@@ -32,15 +32,10 @@ class Frame extends JFrame {
     }
 }
 
-class Presenter extends JButton {
+class Presenter {
     Frame frame;
-    String buttonText;
-    Color buttonColor;
-    int buttonSize;
-    boolean buttonServiceability;
-    double buttonElasticity;
     JTextField jTextField = new JTextField();
-    JButton editBtn = new JButton(buttonText);
+    JButton editBtn = new JButton();
 
     JButton changeBtn = new JButton("Change");
     JButton deleteBtn = new JButton("Exit");
@@ -131,9 +126,9 @@ class Action {
 
 class Listener {
 
-
+    private Action action = new Action();
     void addChangeActionListener(JButton buttonToChange, JButton buttonToPress) {
-        Action action = new Action();
+
         buttonToPress.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 action.changeButton(buttonToChange);
@@ -142,7 +137,7 @@ class Listener {
     }
 
     void addDeleteButtonListener(JButton buttonToDelete, JButton buttonToPress, Frame frame, JTextField jTextField) {
-        Action action = new Action();
+
         buttonToPress.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 action.deleteButton(buttonToDelete, frame, jTextField);
@@ -151,7 +146,7 @@ class Listener {
     }
 
     void addChooseColotListener(JColorChooser colorChooser, JButton btn) {
-        Action action = new Action();
+
         colorChooser.getSelectionModel().addChangeListener(
                 new ChangeListener() {
                     public void stateChanged(ChangeEvent e) {
@@ -162,7 +157,7 @@ class Listener {
     }
 
     void addChangableButtonListener(JButton btn, JTextField jTextField) {
-        Action action = new Action();
+
         btn.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 action.pressChangeableButton(btn, jTextField);
